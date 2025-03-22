@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopPath - Smart Shopping Route Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+    
+
+</head>
+
+<body>
+    <canvas class="particles"></canvas>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo-image">
+                <img src="{% static 'assets/logoimage.png' %}" alt="Rabbit Way Logo">
+            </div>
+            <div class="logo-text">Rabbit Way</div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About Us</a>
+            <a href="signup.html" id="authTrigger">Sign In</a>
+        </div>
+    </nav>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Create New Account </h2>
+            
+            <form id="signupForm" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="signupName" id="signupName" placeholder="Full name" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="email" name="signupEmail" id="signupEmail" placeholder="Email address" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" name="signupPassword" id="signupPassword" placeholder="Create password" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" name="signupConfirmPassword" id="signupConfirmPassword" placeholder="Confirm password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Create Account</button>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="{% url 'login' %}" class="text-link">Sign In</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <script src="js/particles.js"></script>
+</body>
+</html>
