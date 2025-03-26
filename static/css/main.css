@@ -340,7 +340,87 @@ input[type="text"] {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
 
+.profile-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-btn img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.profile-btn:hover img {
+    opacity: 0.8;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 200px;
+    z-index: 100;
+    padding: 10px 0;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* Make it visible when active */
+.profile-menu.active .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* User Info */
+.dropdown-menu p {
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+#userEmail {
+    font-size: 12px;
+    color: #777;
+    font-weight: normal;
+}
+
+/* Sign Out Button */
+.logout-btn {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #ff4d4d;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+    background: #ffe5e5;
+}
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero {

@@ -17,6 +17,8 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+     path('submit-review/', submit_review, name='submit-review'),
+    path('fetch-reviews/', fetch_reviews, name='fetch-reviews'),
   
 ]
 

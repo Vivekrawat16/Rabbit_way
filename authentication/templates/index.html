@@ -10,94 +10,18 @@
     <title>ShopPath - Smart Shopping Route Planner</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZS6qxVsFwyNJuYTdDSm2y8mxlgV6RAz4&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZS6qxVsFwyNJuYTdDSm2y8mxlgV6RAz4&callback=initMap" async defer></script>
+    <!-- <link rel="stylesheet" href="/static/css/main.css"> -->
+    <!-- {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
 
-    <style>/* Profile menu */
-        /* Profile menu */
-/* Profile Button */
-.profile-menu {
-    position: relative;
-    display: inline-block;
-}
 
-.profile-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-}
+    <style>
+        
+    </style>
 
-.profile-btn img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.profile-btn:hover img {
-    opacity: 0.8;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 120%;
-    right: 0;
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    min-width: 200px;
-    z-index: 100;
-    padding: 10px 0;
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-    opacity: 0;
-    transform: scale(0.95);
-}
-
-/* Make it visible when active */
-.profile-menu.active .dropdown-menu {
-    display: block;
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* User Info */
-.dropdown-menu p {
-    margin: 0;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    border-bottom: 1px solid #eee;
-}
-
-#userEmail {
-    font-size: 12px;
-    color: #777;
-    font-weight: normal;
-}
-
-/* Sign Out Button */
-.logout-btn {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-    color: #ff4d4d;
-    font-weight: bold;
-    transition: background 0.3s ease-in-out;
-}
-
-.logout-btn:hover {
-    background: #ffe5e5;
-}
-
-        </style>
+    
 </head>
 <body>
     <canvas class="particles"></canvas>
@@ -148,6 +72,7 @@
                 <div class="route-planner">
                     <div class="input-group">
                         <input type="text" id="startPoint" placeholder="🏠 Enter starting point...">
+                        <button type="button" id="pickStartLocation" class="map-btn">📍 Select on Map</button>
                     </div>
                     
                     <div class="input-group">
@@ -158,9 +83,7 @@
                                     <button type="button" class="remove-btn">×</button>
                                 </div>
                             </div>
-                            <button type="button" class="btn-add" id="addLocation">
-                                 Add Store Location
-                            </button>
+                            <button type="button" class="btn-add" id="addLocation">➕ Add Store Location</button>
                         </div>
                     </div>
                     
@@ -172,6 +95,20 @@
                 <div id="map"></div>
             </div>
         </section>
+        
+        <!-- Full-Screen Map Modal -->
+        <div id="fullScreenMap" class="full-screen-map hidden">
+            <div class="map-header">
+                <h2>Optimized Route</h2>
+                <button id="closeMap">✖ Close</button>
+            </div>
+            <div id="optimizedMap"></div>
+            <div class="map-info">
+                <p id="distanceInfo">📏 Distance: -- km</p>
+                <p id="trafficInfo">🚦 Traffic: --</p>
+            </div>
+        </div>
+        
 
         <section class="features" id="features">
             <h2>Key Features</h2>
@@ -197,11 +134,11 @@
                 <h3>Share Your Experience</h3>
                 <div class="rating-stars">
                     <div class="stars-container">
-                        <span class="star" data-value="5">☆</span>
-                        <span class="star" data-value="4">☆</span>
-                        <span class="star" data-value="3">☆</span>
-                        <span class="star" data-value="2">☆</span>
                         <span class="star" data-value="1">☆</span>
+                        <span class="star" data-value="2">☆</span>
+                        <span class="star" data-value="3">☆</span>
+                        <span class="star" data-value="4">☆</span>
+                        <span class="star" data-value="5">☆</span>
                     </div>
                 </div>
                 <textarea id="reviewText" placeholder="Write your review..."></textarea>
@@ -214,7 +151,15 @@
         </section>
     </div>
 
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/reviews.js' %}"></script>
+
+
+
     <script>
+        
 // Reviews functionality
 document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star');
@@ -316,31 +261,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
         
         <script src="{% static 'js/particles.js' %}"></script>
-        
-    <script src="{% static 'js/script.js' %}"></script>
-    <script >document.addEventListener("DOMContentLoaded", function () {
-        const profileButton = document.getElementById("profileButton");
-        const profileMenu = document.querySelector(".profile-menu");
+<!--         
+    <script src="{% static 'js/script.js' %}"></script> -->
     
-        if (profileButton) {
-            profileButton.addEventListener("click", function (event) {
-                event.stopPropagation();
-                profileMenu.classList.toggle("active");
-            });
-    
-            document.addEventListener("click", function (event) {
-                if (!profileMenu.contains(event.target)) {
-                    profileMenu.classList.remove("active");
-                }
-            });
-        } else {
-            console.error("Profile button not found! Check your HTML structure.");
-        }
-    });
-    
-    
-    </script>
 </body>
 </html>
