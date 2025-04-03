@@ -61,5 +61,65 @@
         </div>
     </div>
     <script src="js/particles.js"></script>
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            let name = document.getElementById("signupName").value.trim();
+            let email = document.getElementById("signupEmail").value.trim();
+            let password = document.getElementById("signupPassword").value;
+            let confirmPassword = document.getElementById("signupConfirmPassword").value;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let isValid = true;
+            let errorMessage = "";
+    
+            // Clear previous error messages
+            document.querySelectorAll(".error-message").forEach(el => el.remove());
+    
+            // Name validation
+            if (name === "") {
+                errorMessage = "Full name is required.";
+                showError("signupName", errorMessage);
+                isValid = false;
+            }
+    
+            // Email validation
+            if (!emailPattern.test(email)) {
+                errorMessage = "Please enter a valid email address.";
+                showError("signupEmail", errorMessage);
+                isValid = false;
+            }
+    
+            // Password length validation
+            if (password.length < 6) {
+                errorMessage = "Password must be at least 6 characters long.";
+                showError("signupPassword", errorMessage);
+                isValid = false;
+            }
+    
+            // Confirm Password validation
+            if (password !== confirmPassword) {
+                errorMessage = "Passwords do not match.";
+                showError("signupConfirmPassword", errorMessage);
+                isValid = false;
+            }
+    
+            // If any validation fails, prevent form submission
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    
+        // Function to display error message
+        function showError(inputId, message) {
+            let inputField = document.getElementById(inputId);
+            let errorDiv = document.createElement("div");
+            errorDiv.className = "error-message";
+            errorDiv.style.color = "red";
+            errorDiv.style.fontSize = "14px";
+            errorDiv.style.marginTop = "5px";
+            errorDiv.innerText = message;
+            inputField.parentNode.appendChild(errorDiv);
+        }
+    </script>
+    
 </body>
 </html>

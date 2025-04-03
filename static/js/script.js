@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Review submission
     document.getElementById('submitReview').addEventListener('click', () => {
         const comment = document.getElementById('reviewText').value.trim();
-        
+
         if (!selectedRating) {
             alert('Please select a rating before submitting');
             return;
         }
-        
+
         if (comment.length < 10) {
             alert('Please write a review with at least 10 characters');
             return;
@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
             user: 'Anonymous'
         };
 
-        // Proper localStorage handling
         try {
             const storedData = localStorage.getItem('reviews') || '[]';
             const existingReviews = JSON.parse(storedData);
@@ -106,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
             s.classList.remove('active');
         });
         selectedRating = 0;
-        
+
         displayReviews();
     });
 
-    // Display reviews with proper error handling
+    // Function to display reviews with delete buttons
     function displayReviews() {
         const container = document.querySelector('.reviews-list');
         container.innerHTML = '';
@@ -119,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const storedData = localStorage.getItem('reviews') || '[]';
             const reviews = JSON.parse(storedData);
 
-            reviews.reverse().forEach(review => {
+            reviews.forEach((review, index) => {
                 const starsHTML = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
                 const reviewHTML = `
                     <div class="review-card">
@@ -131,14 +130,36 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="review-rating">${starsHTML}</div>
                         </div>
                         <div class="review-content">${review.comment}</div>
+                        <button class="delete-review" data-index="${index}">Delete</button>
                     </div>
                 `;
-                container.insertAdjacentHTML('afterbegin', reviewHTML);
+                container.insertAdjacentHTML('beforeend', reviewHTML);
+            });
+
+            // Attach event listeners to delete buttons
+            document.querySelectorAll('.delete-review').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const index = event.target.dataset.index;
+                    deleteReview(index);
+                });
             });
         } catch (error) {
             console.error('Error loading reviews:', error);
             container.innerHTML = '<p>Error loading reviews. Please try refreshing the page.</p>';
             localStorage.removeItem('reviews');
+        }
+    }
+
+    // Function to delete a review
+    function deleteReview(index) {
+        try {
+            const storedData = localStorage.getItem('reviews') || '[]';
+            let reviews = JSON.parse(storedData);
+            reviews.splice(index, 1); // Remove review at index
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            displayReviews(); // Refresh displayed reviews
+        } catch (error) {
+            console.error('Error deleting review:', error);
         }
     }
 

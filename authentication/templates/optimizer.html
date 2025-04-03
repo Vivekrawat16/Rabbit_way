@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopPath - Route Optimizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPEHex6TAhkZBlHeHIP1kAPzPyUkBD784&libraries=places,geometry&callback=initMap" async defer></script>
+    <style>
+        .main-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: 100vh;
+        }
+
+        .controls-container {
+            padding: 20px;
+            background: #f5f5f5;
+            overflow-y: auto;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .autocomplete-input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .route-steps {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="controls-container">
+            <h1>Route Optimizer</h1>
+            
+            <div class="input-group">
+                <label>Start Point:</label>
+                <input type="text" id="start-point" class="autocomplete-input" placeholder="Enter starting location">
+            </div>
+
+            <div class="input-group">
+                <label>Destinations:</label>
+                <div id="destinations-container">
+                    <div class="destination-input">
+                        <input type="text" class="autocomplete-input destination-field" placeholder="Enter destination">
+                        <button class="remove-dest-btn">×</button>
+                    </div>
+                </div>
+                <button id="add-destination" class="btn">Add Destination</button>
+            </div>
+
+            <button id="optimize-route" class="btn primary">Optimize Route</button>
+
+            <div class="route-steps" id="route-steps">
+                <h3>Optimized Route</h3>
+                <div id="directions-panel"></div>
+                <div id="route-stats"></div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <script>
+        let map;
+        let directionsService;
+        let directionsRenderer;
+        let autocompleteInstances = [];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: false
+            });
+
+            initAutocomplete();
+        }
+
+        function initAutocomplete() {
+            const inputs = document.querySelectorAll('.autocomplete-input');
+            inputs.forEach(input => {
+                const autocomplete = new google.maps.places.Autocomplete(input, {
+                    fields: ['geometry', 'name'],
+                    types: ['establishment', 'geocode']
+                });
+                autocompleteInstances.push(autocomplete);
+            });
+        }
+
+        function calculateOptimizedRoute() {
+            const startPoint = document.getElementById('start-point').value;
+            const destinations = Array.from(document.querySelectorAll('.destination-field'))
+                                     .map(input => input.value)
+                                     .filter(Boolean);
+
+            if (!startPoint || destinations.length < 2) {
+                alert('Please enter both start point and at least two destinations');
+                return;
+            }
+
+            const waypoints = destinations.map(destination => ({
+                location: destination,
+                stopover: true
+            }));
+
+            const request = {
+                origin: startPoint,
+                destination: startPoint, // Circular route
+                waypoints: waypoints,
+                optimizeWaypoints: true,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(request, (result, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(result);
+                    displayRouteDetails(result);
+                } else {
+                    alert('Could not calculate route: ' + status);
+                }
+            });
+        }
+
+        function displayRouteDetails(response) {
+            const route = response.routes[0];
+            const summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '';
+            
+            route.legs.forEach((leg, index) => {
+                summaryPanel.innerHTML += `<p><strong>Step ${index + 1}:</strong> ${leg.start_address} to ${leg.end_address}<br>
+                Distance: ${leg.distance.text} | Duration: ${leg.duration.text}</p>`;
+            });
+
+            document.getElementById('route-stats').innerHTML = `
+                <p>Total Distance: ${route.legs.reduce((sum, leg) => sum + leg.distance.value, 0)/1000} km</p>
+                <p>Estimated Time: ${route.legs.reduce((sum, leg) => sum + leg.duration.value, 0)/60} minutes</p>
+            `;
+        }
+
+        // Event Listeners
+        document.getElementById('add-destination').addEventListener('click', () => {
+            const newInput = document.createElement('div');
+            newInput.className = 'destination-input';
+            newInput.innerHTML = `
+                <input type="text" class="autocomplete-input destination-field" placeholder="Enter destination">
+                <button class="remove-dest-btn">×</button>
+            `;
+            document.getElementById('destinations-container').appendChild(newInput);
+            initAutocomplete();
+        });
+
+        document.getElementById('optimize-route').addEventListener('click', calculateOptimizedRoute);
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-dest-btn')) {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>

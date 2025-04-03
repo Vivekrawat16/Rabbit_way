@@ -18,7 +18,306 @@
 
 
     <style>
+        .hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            margin-top: 50px;
+        }
+    
+        .gradient-heading {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+    
+        .gradient-text {
+            background: linear-gradient(45deg, #4F46E5, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+    
+        .cta-button {
+            background: #4F46E5;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+        }
+    
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+            background: #4338CA;
+        }
+    
+        .cta-arrow {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+    
+        .cta-button:hover .cta-arrow {
+            transform: translateX(3px);
+        }
+    
+        .hero-features {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+    
+        .feature-bubble {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+    
+        .feature-bubble:hover {
+            transform: translateY(-3px);
+        }
+    
+        @media (max-width: 768px) {
+            .gradient-heading {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+
+        .about {
+        padding: 4rem 2rem;
+        background: #f8f9fa;
+    }
+
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-heading {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .about-subtitle {
+        text-align: center;
+        color: #6b7280;
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .about-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .about-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .about-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .about-story {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .about-list {
+        columns: 2;
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0;
+    }
+
+    .about-list li {
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .about-stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4F46E5;
+    }
+
+    .stat-label {
+        color: #6b7280;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .about-list {
+            columns: 1;
+        }
         
+        .section-heading {
+            font-size: 2rem;
+        }
+    }
+    .site-footer {
+        background: #2d2d2d;
+        color: #ffffff;
+        padding: 2rem 1rem;
+        margin-top: 4rem;
+        border-top: 3px solid #4F46E5;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 1rem 0;
+    }
+
+    .footer-section {
+        padding: 1rem;
+    }
+
+    .footer-heading {
+        color: #4F46E5;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #4F46E5;
+        padding-bottom: 0.5rem;
+    }
+
+    .college-logo {
+        width: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .team-members {
+        list-style: none;
+        padding: 0;
+    }
+
+    .team-members li {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 4px;
+    }
+
+    .project-repo a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #fff;
+        text-decoration: none;
+        margin-top: 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .project-repo a:hover {
+        color: #4F46E5;
+    }
+
+    .project-repo img {
+        width: 25px;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-icon {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        color: white;
+        transition: transform 0.3s ease;
+    }
+
+    .linkedin { background: #0A66C2; }
+    .github { background: #333; }
+
+    .social-icon:hover {
+        transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+    }
+
+    #current-year {
+        color: #4F46E5;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+        }
+    }
     </style>
 
     
@@ -26,11 +325,13 @@
 <body>
     <canvas class="particles"></canvas>
     <div class="content-wrapper">
+        
         {% load static %}
 <nav class="navbar">
     <div class="logo-container">
         <div class="logo-image">
             <img src="{% static 'assets/logoimage.png' %}" alt="ShopPath Logo">
+            
         </div>
         <div class="logo-text">ShopPath</div>
     </div>
@@ -66,48 +367,35 @@
 
         <section class="hero" id="home">
             <div class="hero-content">
-                <h1>Smart Shopping Route Optimization</h1>
-                <p>Plan your shopping trips efficiently using advanced TSP algorithms</p>
+                <div class="hero-text">
+                    <h1 class="gradient-heading">
+                        <span class="gradient-text">Smart Shopping</span><br>
+                        Route Optimization
+                    </h1>
+                    <p class="hero-subtitle">Transform Your Shopping Experience with AI-Powered Route Planning</p>
+                    
+                    <button class="cta-button pulse" onclick="window.location.href='{% url 'optimizer' %}';">
+                        🚀 Start Optimizing Now
+                        <span class="cta-arrow">→</span>
+                    </button>
+                    
+                    
+                    
                 
-                <div class="route-planner">
-                    <div class="input-group">
-                        <input type="text" id="startPoint" placeholder="🏠 Enter starting point...">
-                        <button type="button" id="pickStartLocation" class="map-btn">📍 Select on Map</button>
+                <div class="hero-features">
+                    <div class="feature-bubble">
+                        🕒 Save 40% Time
                     </div>
-                    
-                    <div class="input-group">
-                        <div class="locations-container">
-                            <div class="locations-list" id="locationsList">
-                                <div class="location-item">
-                                    <input type="text" placeholder="🏪 Store Location #1">
-                                    <button type="button" class="remove-btn">×</button>
-                                </div>
-                            </div>
-                            <button type="button" class="btn-add" id="addLocation">➕ Add Store Location</button>
-                        </div>
+                    <div class="feature-bubble">
+                        📍 Multi-Stop Routing
                     </div>
-                    
-                    <button class="btn" id="optimizeBtn">🚀 Optimize Route</button>
+                    <div class="feature-bubble">
+                        ⛽ Fuel Efficiency
+                    </div>
                 </div>
-            </div>
-            
-            <div class="map-container">
-                <div id="map"></div>
             </div>
         </section>
         
-        <!-- Full-Screen Map Modal -->
-        <div id="fullScreenMap" class="full-screen-map hidden">
-            <div class="map-header">
-                <h2>Optimized Route</h2>
-                <button id="closeMap">✖ Close</button>
-            </div>
-            <div id="optimizedMap"></div>
-            <div class="map-info">
-                <p id="distanceInfo">📏 Distance: -- km</p>
-                <p id="trafficInfo">🚦 Traffic: --</p>
-            </div>
-        </div>
         
 
         <section class="features" id="features">
@@ -127,9 +415,11 @@
                 </div>
             </div>
         </section>
+        
         <section class="reviews" id="reviews">
             <h2>User Experiences</h2>
             
+            {% if user.is_authenticated %}
             <div class="review-form">
                 <h3>Share Your Experience</h3>
                 <div class="rating-stars">
@@ -144,126 +434,132 @@
                 <textarea id="reviewText" placeholder="Write your review..."></textarea>
                 <button class="btn" id="submitReview">Submit Review</button>
             </div>
-        
+            {% else %}
+            <div class="login-prompt">
+                <p>Please <a href="{% url 'login' %}">login</a> to submit a review.</p>
+            </div>
+            {% endif %}
+            
             <div class="reviews-list">
                 <!-- Reviews will be dynamically inserted here -->
             </div>
         </section>
+        <section class="about" id="about">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2 class="section-heading gradient-text">About ShopPath</h2>
+                    <p class="about-subtitle">Revolutionizing Shopping Efficiency Through Intelligent Routing</p>
+                    
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <div class="about-icon">🗺️</div>
+                            <h3>Our Mission</h3>
+                            <p>Transform complex shopping trips into optimized experiences using advanced pathfinding algorithms</p>
+                        </div>
+                        
+                        <div class="about-card">
+                            <div class="about-icon">⚡</div>
+                            <h3>Technology</h3>
+                            <p>Combining Google Maps API with custom TSP solvers for maximum efficiency</p>
+                        </div>
+                        
+                        <div class="about-card">
+                            <div class="about-icon">🎯</div>
+                            <h3>Accuracy</h3>
+                            <p>Precision routing with real-time traffic and distance calculations</p>
+                        </div>
+                    </div>
+        
+                    <div class="about-story">
+                        <h3>Why Choose ShopPath?</h3>
+                        <p>Born from frustration with inefficient shopping routes, our platform leverages:</p>
+                        <ul class="about-list">
+                            <li>🚗 Dynamic traffic pattern analysis</li>
+                            <li>🛒 Store location optimization</li>
+                            <li>⏲️ Time-based route scoring</li>
+                            <li>📊 Historical shopping data integration</li>
+                        </ul>
+                        
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">50K+</div>
+                                <div class="stat-label">Routes Optimized</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">40%</div>
+                                <div class="stat-label">Average Time Saved</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">95%</div>
+                                <div class="stat-label">User Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4 class="footer-heading">Project Details</h4>
+                <div class="college-info">
+                    <img src="{% static 'assets/college-logo.png' %}" alt="College Logo" class="college-logo">
+                    <p>3rd Year IT Department Project<br>
+                    Shri GS Institute of Science and Technology<br>
+                    2024-2025 Academic Year</p>
+                </div>
+            </div>
+    
+            <div class="footer-section">
+                <h4 class="footer-heading">Development Team</h4>
+                <ul class="team-members">
+                    <li>Malay Singh Bisht</li>
+                    <li>Vivek Chouhan</li>
+                    <li>Vivek Rawat</li>
+                </ul>
+                <div class="project-repo">
+                    <a href="https://github.com/yourusername/shoppath" target="_blank">
+                        <img src="{% static 'assets/github-icon.png' %}" alt="GitHub">
+                        View Project Repository
+                    </a>
+                </div>
+            </div>
+    
+            <div class="footer-section">
+                <h4 class="footer-heading">Contact</h4>
+                <p class="contact-info">
+                    <strong>Project Guide:</strong><br>
+                    Prof. [Guide Name]<br>
+                    <strong>Department:</strong> Information Technology<br>
+                    <strong>Email:</strong> itdepartment@srit.ac.in
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon linkedin">LinkedIn</a>
+                    <a href="#" class="social-icon github">GitHub</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>© <span id="current-year"></span> ShopPath - Academic Project | Developed with ❤️ by Team </p>
+        </div>
+    </footer>
 
 
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/reviews.js' %}"></script>
 
+    
 
 
-    <script>
-        
-// Reviews functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const stars = document.querySelectorAll('.star');
-    let selectedRating = 0;
 
-    // Star rating interaction
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            selectedRating = parseInt(star.dataset.value);
-            stars.forEach(s => {
-                const value = parseInt(s.dataset.value);
-                s.textContent = value <= selectedRating ? '★' : '☆';
-                s.classList.toggle('active', value <= selectedRating);
-            });
-        });
-    });
-
-    // Review submission
-    document.getElementById('submitReview').addEventListener('click', () => {
-        const comment = document.getElementById('reviewText').value.trim();
-        
-        if (!selectedRating) {
-            alert('Please select a rating before submitting');
-            return;
-        }
-        
-        if (comment.length < 10) {
-            alert('Please write a review with at least 10 characters');
-            return;
-        }
-
-        const review = {
-            rating: selectedRating,
-            comment,
-            date: new Date().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }),
-            user: 'Anonymous'
-        };
-
-        // Proper localStorage handling
-        try {
-            const storedData = localStorage.getItem('reviews') || '[]';
-            const existingReviews = JSON.parse(storedData);
-            const updatedReviews = [...existingReviews, review];
-            localStorage.setItem('reviews', JSON.stringify(updatedReviews));
-        } catch (error) {
-            console.error('Error saving review:', error);
-            localStorage.setItem('reviews', JSON.stringify([review]));
-        }
-
-        // Clear form
-        document.getElementById('reviewText').value = '';
-        stars.forEach(s => {
-            s.textContent = '☆';
-            s.classList.remove('active');
-        });
-        selectedRating = 0;
-        
-        displayReviews();
-    });
-
-    // Display reviews with proper error handling
-    function displayReviews() {
-        const container = document.querySelector('.reviews-list');
-        container.innerHTML = '';
-
-        try {
-            const storedData = localStorage.getItem('reviews') || '[]';
-            const reviews = JSON.parse(storedData);
-
-            reviews.reverse().forEach(review => {
-                const starsHTML = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-                const reviewHTML = `
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div>
-                                <span class="review-user">${review.user}</span>
-                                <span class="review-date">${review.date}</span>
-                            </div>
-                            <div class="review-rating">${starsHTML}</div>
-                        </div>
-                        <div class="review-content">${review.comment}</div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('afterbegin', reviewHTML);
-            });
-        } catch (error) {
-            console.error('Error loading reviews:', error);
-            container.innerHTML = '<p>Error loading reviews. Please try refreshing the page.</p>';
-            localStorage.removeItem('reviews');
-        }
-    }
-
-    // Initial load
-    displayReviews();
-});
-</script>
+    
 
 
         
-        <script src="{% static 'js/particles.js' %}"></script>
+        <!-- <script src="{% static 'js/particles.js' %}"></script> -->
 <!--         
     <script src="{% static 'js/script.js' %}"></script> -->
     

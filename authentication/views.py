@@ -102,6 +102,9 @@ def fetch_reviews(request):
     } for review in reviews]
 
     return JsonResponse({'reviews': review_list})
+
+def optimizer_view(request):
+    return render(request, 'optimizer.html')
   
 
 

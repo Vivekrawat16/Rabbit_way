@@ -29,7 +29,7 @@
             <div class="logo-text">Rabbit Way</div>
         </div>
         <div class="nav-links">
-            <a href="#home">Home</a>
+            <a href="{% static 'a' %}">Home</a>
             <a href="#features">Features</a>
             <a href="#about">About Us</a>
             <a href="signup.html" id="authTrigger">Sign In</a>
@@ -64,6 +64,49 @@
         </div>
     </div>
     <script src="js/particles.js"></script>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            let email = document.getElementById("loginEmail").value.trim();
+            let password = document.getElementById("loginPassword").value;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let isValid = true;
+            let errorMessage = "";
+    
+            // Clear previous error messages
+            document.querySelectorAll(".error-message").forEach(el => el.remove());
+    
+            // Email validation
+            if (!emailPattern.test(email)) {
+                errorMessage = "Please enter a valid email address.";
+                showError("loginEmail", errorMessage);
+                isValid = false;
+            }
+    
+            // Password validation
+            if (password.length < 6) {
+                errorMessage = "Password must be at least 6 characters long.";
+                showError("loginPassword", errorMessage);
+                isValid = false;
+            }
+    
+            // If validation fails, prevent form submission
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    
+        // Function to display error message
+        function showError(inputId, message) {
+            let inputField = document.getElementById(inputId);
+            let errorDiv = document.createElement("div");
+            errorDiv.className = "error-message";
+            errorDiv.style.color = "red";
+            errorDiv.style.fontSize = "14px";
+            errorDiv.style.marginTop = "5px";
+            errorDiv.innerText = message;
+            inputField.parentNode.appendChild(errorDiv);
+        }
+    </script>
     
 
     

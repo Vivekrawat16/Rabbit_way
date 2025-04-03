@@ -19,6 +19,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
      path('submit-review/', submit_review, name='submit-review'),
     path('fetch-reviews/', fetch_reviews, name='fetch-reviews'),
+path('optimizer/', views.optimizer_view, name='optimizer'),
   
 ]
 
